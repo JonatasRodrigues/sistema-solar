@@ -1,0 +1,54 @@
+version : '3'
+services:  
+  
+  grafana:
+    image: grafana/grafana:5.4.2
+    ports:
+     - 3000:3000
+    depends_on:
+     - prom
+    container_name: grafana
+
+  prom:
+   image: prom/prometheus:v2.6.0
+   volumes:
+     - ./prometheus.yml:/etc/prometheus/prometheus.yml
+   command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+   ports:
+     - 9090:9090
+   depends_on:
+     - app
+   container_name: prometheus
+  
+  mysqldbserver:
+    build:
+      context: . 
+      dockerfile: mysqldb.dockerfile
+    expose:
+      - "3306"
+    
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_DATABASE: meli_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin123
+     
+      container_name: mysqldbserver
+
+  app:
+    build:
+      context: . 
+      dockerfile: springapp.dockerfile
+    ports: 
+      - "80:80"
+    container_name: spring-boot
+        
+    environment:
+      DATABASE_HOST: mysqldbserver
+      DATABASE_USER: root
+      DATABASE_PASSWORD: admin123
+      DATABASE_NAME: meli_db
+      DATABASE_PORT: 3306
+      
+    depends_on:
+      - mysqldbserver
