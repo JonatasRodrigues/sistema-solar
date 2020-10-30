@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/JonatasRodrigues/sistema-solar.svg?style=svg)](https://circleci.com/gh/JonatasRodrigues/sistema-solar)
+[![codecov](https://codecov.io/gh/JonatasRodrigues/sistema-solar/branch/main/graph/badge.svg)](https://codecov.io/gh/JonatasRodrigues/sistema-solar)
+
+
 # sistema-solar
 
 Aplicação para calcular a previsão do tempo de um determinado sistema solar em um período de tempo.
