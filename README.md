@@ -28,7 +28,7 @@ O JobTask realizará a carga no banco de dados.
 - mvn clean compile install
 - docker-compose up --build
 
-A partir de agora você poderá acessar os serviços pelos endpoints.
+A partir de agora você poderá acessar os serviços.
 
 
 ### Endpoint
